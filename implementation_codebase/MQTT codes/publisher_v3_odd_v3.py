@@ -9,7 +9,7 @@ import time
     print("message qos=",message.qos)
     print("message retain flag=",message.retain)"""
 # the global variable below is the channel name.
-CHANNEL_ID = "sensor1"
+CHANNEL_ID = "sensor2"
 # The global variable below is the path name. Put it simply, this shows where a particular sensor is located
 PATH_NAME = "/MQTT/myhome/room1/"
 """This method is another binding method. """
@@ -24,7 +24,7 @@ def on_connect(client, userdata, flags, rc):
 #broker_address="iot.eclipse.org"
 mqtt.Client.connected_flag=False#create flag in class
 print("creating new instance")
-client = mqtt.Client("P4") #create new instance
+client = mqtt.Client("P3") #create new instance
 #client.on_message=on_message #We attach a function to callback
 client.on_connect = on_connect #We attached another function to callback
 #Now we set up username and passwords and TLS
@@ -46,7 +46,7 @@ while not client.connected_flag:#Wait in loop until properly connected
 
 for i in range(100):
     print("Publishing message to topic",PATH_NAME+CHANNEL_ID)
-    client.publish(PATH_NAME+CHANNEL_ID,str(2*i))
+    client.publish(PATH_NAME+CHANNEL_ID,str((2*i)+1))
     time.sleep(4) # wait
 client.loop_stop() 
 client.disconnect()
